@@ -1,6 +1,8 @@
 package com.tugalsan.api.console.server;
 
 import com.tugalsan.api.charset.client.TGS_CharSetUTF8;
+import com.tugalsan.api.executable.client.TGS_ExecutableType1;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class TS_ConsoleProgressBar {
@@ -37,5 +39,9 @@ public class TS_ConsoleProgressBar {
         var progressBar = "\r" + progressLine.toString();
         System.out.print(progressBar);
         return this;
+    }
+
+    public void forEach(TGS_ExecutableType1<TS_ConsoleProgressBar> progress) {
+        IntStream.range(0, size).forEach(i -> progress.execute(this));
     }
 }
