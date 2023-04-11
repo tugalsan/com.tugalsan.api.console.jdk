@@ -12,6 +12,7 @@ public class TS_ConsoleProgressBar {
         this.size = size;
         this.progressLine = new StringBuilder();
         Stream.generate(() -> TGS_CharSetUTF8.UTF8_INCOMPLETE()).limit(size).forEach(progressLine::append);
+        progressLine.insert(0, "\r");
     }
     final private int size;
     private int current;
@@ -30,14 +31,19 @@ public class TS_ConsoleProgressBar {
     }
 
     public TS_ConsoleProgressBar setCurrent(int newCurret) {
+        if (newCurret < 0) {
+            newCurret = 0;
+        }
+        if (newCurret > size - 1) {
+            newCurret = size - 1;
+        }
         current = newCurret;
-        progressLine.replace(current, current + 1, TGS_CharSetUTF8.UTF8_COMPLETE());
+        progressLine.replace(current + 1, current + 2, TGS_CharSetUTF8.UTF8_COMPLETE());
         return this;
     }
 
     public TS_ConsoleProgressBar showCurrent() {
-        var progressBar = "\r" + progressLine.toString();
-        System.out.print(progressBar);
+        System.out.print(progressLine);
         return this;
     }
 
