@@ -42,6 +42,8 @@ public class TS_ConsoleProgressBar {
     }
 
     public void forEach(TGS_ExecutableType1<TS_ConsoleProgressBar> progress) {
-        IntStream.range(0, size).forEach(i -> progress.execute(this));
+        IntStream.range(0, size).forEach(i -> {
+            progress.execute(setCurrent(i));
+        });
     }
 }
