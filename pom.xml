@@ -12,9 +12,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>me.tongfei</groupId>
-            <artifactId>progressbar</artifactId>
-            <version>0.9.4</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>com.tugalsan.api.stream</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>com.tugalsan.api.charset</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     
