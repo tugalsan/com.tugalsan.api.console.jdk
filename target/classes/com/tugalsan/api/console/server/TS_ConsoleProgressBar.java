@@ -2,7 +2,7 @@ package com.tugalsan.api.console.server;
 
 import com.tugalsan.api.charset.client.TGS_CharSetUTF8;
 import com.tugalsan.api.coronator.client.TGS_Coronator;
-import com.tugalsan.api.executable.client.TGS_ExecutableType1;
+import com.tugalsan.api.runnable.client.TGS_RunnableType1;
 import com.tugalsan.api.log.server.TS_Log;
 import com.tugalsan.api.math.client.TGS_MathUtils;
 import java.util.stream.IntStream;
@@ -116,9 +116,9 @@ public class TS_ConsoleProgressBar {
         return this;
     }
 
-    public void forEach(TGS_ExecutableType1<TS_ConsoleProgressBar> progress) {
+    public void forEach(TGS_RunnableType1<TS_ConsoleProgressBar> progress) {
         IntStream.rangeClosed(0, stepSize).forEach(stepNumber -> {
-            progress.execute(setCurrent(stepNumber, null));
+            progress.run(setCurrent(stepNumber, null));
         });
     }
 }
