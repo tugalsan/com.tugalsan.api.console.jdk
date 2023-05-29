@@ -39,7 +39,15 @@ public class TGS_ConsoleUtils {
             sb.appendCodePoint(cpCur);
         }
         if (!sb.isEmpty()) {
-            tokens.add(sb.toString());
+            var newTokenStartsWithDoubleQuote = !sb.isEmpty() && sb.codePointAt(0) == cpDoubleQuote;
+            var newTokenEndsWithDoubleQuote = sb.length() > 1 && sb.codePointAt(sb.length() - 1) == cpDoubleQuote;
+            var newTokenMessageComplete = newTokenStartsWithDoubleQuote && newTokenEndsWithDoubleQuote;
+            if (newTokenMessageComplete) {
+                var newToken = sb.substring(1, sb.length() - 1);
+                tokens.add(newToken);
+            } else {
+                tokens.add(sb.toString());
+            }
         }
         return tokens;
     }
