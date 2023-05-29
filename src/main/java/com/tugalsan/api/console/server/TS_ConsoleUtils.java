@@ -20,11 +20,13 @@ public class TS_ConsoleUtils {
 
     public static void mainLoop(List<String> quitCommands, TGS_RunnableType1<List<String>> tokens, String... args) {
         TS_ConsoleUtils.clearScreen();
-        var line = "";
-        while (!TGS_CharSetCast.equalsLocaleIgnoreCase(line, "q") || !TGS_CharSetCast.equalsLocaleIgnoreCase(line, "quit")) {
+        while (true) {
             if (args == null) {
                 d.cr("main", "newCommand:");
-                line = TS_InputKeyboardUtils.readLineFromConsole();
+                var line = TS_InputKeyboardUtils.readLineFromConsole().trim();
+                if (TGS_CharSetCast.equalsLocaleIgnoreCase(line, "q") || TGS_CharSetCast.equalsLocaleIgnoreCase(line, "quit")) {
+                    return;
+                }
                 TS_ConsoleUtils.clearScreen();
                 d.cr("main", "givenCommand", line);
                 var parsedLine = TGS_ConsoleUtils.parseLine(line);
