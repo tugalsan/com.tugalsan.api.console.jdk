@@ -1,0 +1,4 @@
+--patch-module
+com.tugalsan.api.console=_
+--add-reads
+com.tugalsan.api.console=ALL-UNNAMED
