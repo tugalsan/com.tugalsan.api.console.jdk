@@ -6,7 +6,9 @@ module com.tugalsan.api.console {
     requires com.tugalsan.api.coronator;
     requires com.tugalsan.api.callable;
     requires com.tugalsan.api.log;
+    requires com.tugalsan.api.list;
     requires com.tugalsan.api.math;
+    requires com.tugalsan.api.stream;
     exports com.tugalsan.api.console.client;
     exports com.tugalsan.api.console.server;
 }
