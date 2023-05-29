@@ -30,7 +30,9 @@ public class TS_ConsoleUtils {
                 var parsedLine = TGS_ConsoleUtils.parseLine(line);
                 tokens.run(parsedLine);
             } else {
-                tokens.run(TGS_StreamUtils.toLst(Arrays.stream(args)));
+                var parsedLine = TGS_StreamUtils.toLst(Arrays.stream(args));
+                d.cr("main", "mainCommad:", parsedLine);
+                tokens.run(parsedLine);
                 args = null;
             }
         }
