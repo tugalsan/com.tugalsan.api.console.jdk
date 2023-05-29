@@ -18,8 +18,12 @@ public class TGS_ConsoleUtils {
             var newTokenEndsWithDoubleQuote = sb.length() > 1 && sb.codePointAt(sb.length() - 1) == cpDoubleQuote;
             var newTokenMessageComplete = newTokenStartsWithDoubleQuote && newTokenEndsWithDoubleQuote;
             if (cpCurIsSpace && newTokenMessageComplete) {
-                var newToken = sb.toString();
 //                d.ci("parseLine", cpCur, "cpCurIsSpace && newTokenMessageComplete", "newToken", newToken);
+                if (sb.length() == 2) {
+                    tokens.add("");
+                    continue;
+                }
+                var newToken = sb.substring(1, sb.length() - 1);
                 tokens.add(newToken);
                 sb.setLength(0);
                 continue;
