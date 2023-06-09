@@ -16,7 +16,7 @@ public class TS_ConsoleUtils {
         System.out.flush();
     }
 
-    public static void mainLoop(List<String> quitCommands, List<String> clearScreen, TGS_RunnableType2<CharSequence, List<String>> cmd_restArguments, final CharSequence... initCmdAndArguments) {
+    public static void mainLoop(List<String> quitCommands, List<String> clearScreen, TGS_RunnableType2<CharSequence, List<CharSequence>> cmd_restArguments, final CharSequence... initCmdAndArguments) {
         TS_ConsoleUtils.clearScreen();
         if (initCmdAndArguments != null && initCmdAndArguments.length > 0) {
             var fullInitCmd = String.join(" ", initCmdAndArguments);
