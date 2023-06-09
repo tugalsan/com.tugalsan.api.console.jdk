@@ -3,9 +3,7 @@ package com.tugalsan.api.console.server;
 import com.tugalsan.api.console.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
 import com.tugalsan.api.log.server.TS_Log;
-import com.tugalsan.api.runnable.client.TGS_RunnableType1;
-import com.tugalsan.api.stream.client.TGS_StreamUtils;
-import java.util.Arrays;
+import com.tugalsan.api.runnable.client.TGS_RunnableType2;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,28 +16,30 @@ public class TS_ConsoleUtils {
         System.out.flush();
     }
 
-    public static void mainLoop(List<String> quitCommands, List<String> clearScreen, TGS_RunnableType1<List<String>> tokens, String... args) {
+    public static void mainLoop(List<String> quitCommands, List<String> clearScreen, TGS_RunnableType2<CharSequence, List<String>> cmd_restArguments, final CharSequence... initCmdAndArguments) {
         TS_ConsoleUtils.clearScreen();
-        while (true) {
-            if (args == null) {
-                d.cr("main", "newCommand:");
-                var line = TS_InputKeyboardUtils.readLineFromConsole().trim();
-                if (quitCommands.stream().filter(cmd -> Objects.equals(cmd, line)).findAny().isPresent()) {
-                    return;
-                }
-                TS_ConsoleUtils.clearScreen();
-                if (clearScreen.stream().filter(cmd -> Objects.equals(cmd, line)).findAny().isPresent()) {
-                    continue;
-                }
-                d.cr("main", "givenCommand", line);
-                var parsedLine = TGS_ConsoleUtils.parseLine(line);
-                tokens.run(parsedLine);
-            } else {
-                var parsedLine = TGS_StreamUtils.toLst(Arrays.stream(args));
-                d.cr("main", "mainCommad:", parsedLine);
-                tokens.run(parsedLine);
-                args = null;
+        if (initCmdAndArguments != null && initCmdAndArguments.length > 0) {
+            var fullInitCmd = String.join(" ", initCmdAndArguments);
+            var fullInitCmd_ParsedLine = TGS_ConsoleUtils.parseLine(fullInitCmd);
+            if (!fullInitCmd_ParsedLine.isEmpty()) {
+                var fullInitCmd_ParsedList = TGS_ConsoleUtils.parseList(fullInitCmd_ParsedLine);
+                cmd_restArguments.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
             }
+        }
+        while (true) {
+            d.cr("main", "newCommand:");
+            var line = TS_InputKeyboardUtils.readLineFromConsole().trim();
+            if (quitCommands.stream().filter(cmd -> Objects.equals(cmd, line)).findAny().isPresent()) {
+                return;
+            }
+            TS_ConsoleUtils.clearScreen();
+            if (clearScreen.stream().filter(cmd -> Objects.equals(cmd, line)).findAny().isPresent()) {
+                continue;
+            }
+            d.cr("main", "givenCommand", line);
+            var parsedLine = TGS_ConsoleUtils.parseLine(line);
+            var parsedList = TGS_ConsoleUtils.parseList(parsedLine);
+            cmd_restArguments.run(parsedList.value0, parsedList.value1);
         }
     }
 }

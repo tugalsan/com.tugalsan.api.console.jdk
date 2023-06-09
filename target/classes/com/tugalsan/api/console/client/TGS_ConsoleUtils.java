@@ -1,9 +1,23 @@
 package com.tugalsan.api.console.client;
 
+import com.tugalsan.api.stream.client.TGS_StreamUtils;
+import com.tugalsan.api.tuple.client.TGS_Tuple2;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class TGS_ConsoleUtils {
+
+    public static TGS_Tuple2<String, List<String>> parseList(List<String> parsedLine) {
+        return TGS_Tuple2.of(
+                parsedLine.isEmpty() ? null : parsedLine.get(0),
+                TGS_StreamUtils.toLst(
+                        IntStream.range(0, parsedLine.size())
+                                .filter(i -> i != 0)
+                                .mapToObj(i -> parsedLine.get(i))
+                )
+        );
+    }
 
     public static List<String> parseLine(String line) {
         List<String> tokens = new ArrayList();
