@@ -1,6 +1,5 @@
 package com.tugalsan.api.console.server;
 
-import com.tugalsan.api.charset.client.TGS_CharSetCast;
 import com.tugalsan.api.console.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
 import com.tugalsan.api.log.server.TS_Log;
@@ -8,6 +7,7 @@ import com.tugalsan.api.runnable.client.TGS_RunnableType1;
 import com.tugalsan.api.stream.client.TGS_StreamUtils;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class TS_ConsoleUtils {
 
@@ -18,16 +18,19 @@ public class TS_ConsoleUtils {
         System.out.flush();
     }
 
-    public static void mainLoop(List<String> quitCommands, TGS_RunnableType1<List<String>> tokens, String... args) {
+    public static void mainLoop(List<String> quitCommands, List<String> clearScreen, TGS_RunnableType1<List<String>> tokens, String... args) {
         TS_ConsoleUtils.clearScreen();
         while (true) {
             if (args == null) {
                 d.cr("main", "newCommand:");
                 var line = TS_InputKeyboardUtils.readLineFromConsole().trim();
-                if (TGS_CharSetCast.equalsLocaleIgnoreCase(line, "q") || TGS_CharSetCast.equalsLocaleIgnoreCase(line, "quit")) {
+                if (quitCommands.stream().filter(cmd -> Objects.equals(cmd, line)).findAny().isPresent()) {
                     return;
                 }
                 TS_ConsoleUtils.clearScreen();
+                if (clearScreen.stream().filter(cmd -> Objects.equals(cmd, line)).findAny().isPresent()) {
+                    continue;
+                }
                 d.cr("main", "givenCommand", line);
                 var parsedLine = TGS_ConsoleUtils.parseLine(line);
                 tokens.run(parsedLine);
