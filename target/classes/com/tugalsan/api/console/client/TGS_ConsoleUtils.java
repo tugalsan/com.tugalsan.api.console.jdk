@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class TGS_ConsoleUtils {
 
-    public static TGS_Tuple2<String, List<CharSequence>> parseList(List<String> parsedLine) {
+    public static TGS_Tuple2<CharSequence, List<CharSequence>> parseList(List<CharSequence> parsedLine) {
         return TGS_Tuple2.of(
                 parsedLine.isEmpty() ? null : parsedLine.get(0),
                 TGS_StreamUtils.toLst(

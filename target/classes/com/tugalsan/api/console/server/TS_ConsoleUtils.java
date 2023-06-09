@@ -4,6 +4,7 @@ import com.tugalsan.api.console.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
 import com.tugalsan.api.log.server.TS_Log;
 import com.tugalsan.api.runnable.client.TGS_RunnableType2;
+import com.tugalsan.api.stream.client.TGS_StreamUtils;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +23,7 @@ public class TS_ConsoleUtils {
             var fullInitCmd = String.join(" ", initCmdAndArguments);
             var fullInitCmd_ParsedLine = TGS_ConsoleUtils.parseLine(fullInitCmd);
             if (!fullInitCmd_ParsedLine.isEmpty()) {
-                var fullInitCmd_ParsedList = TGS_ConsoleUtils.parseList(fullInitCmd_ParsedLine);
+                var fullInitCmd_ParsedList = TGS_ConsoleUtils.parseList(TGS_StreamUtils.toLst(fullInitCmd_ParsedLine.stream().map(s -> (CharSequence) s)));
                 cmd_restArguments.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
             }
         }
@@ -38,7 +39,7 @@ public class TS_ConsoleUtils {
             }
             d.cr("main", "givenCommand", line);
             var parsedLine = TGS_ConsoleUtils.parseLine(line);
-            var parsedList = TGS_ConsoleUtils.parseList(parsedLine);
+            var parsedList = TGS_ConsoleUtils.parseList(TGS_StreamUtils.toLst(parsedLine.stream().map(s -> (CharSequence) s)));
             cmd_restArguments.run(parsedList.value0, parsedList.value1);
         }
     }
