@@ -3,6 +3,7 @@ package com.tugalsan.api.console.server;
 import com.tugalsan.api.console.client.TGS_ConsoleOption;
 import com.tugalsan.api.console.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
+import com.tugalsan.api.list.client.TGS_ListUtils;
 import com.tugalsan.api.log.server.TS_Log;
 import com.tugalsan.api.stream.client.TGS_StreamUtils;
 import java.util.List;
@@ -36,7 +37,7 @@ public class TS_ConsoleUtils {
             var fullInitCmd = String.join(" ", initCmdAndArguments);
             var fullInitCmd_ParsedLine = TGS_ConsoleUtils.parseLine(fullInitCmd);
             if (!fullInitCmd_ParsedLine.isEmpty()) {
-                var fullInitCmd_ParsedList = TGS_ConsoleUtils.parseList(TGS_StreamUtils.toLst(fullInitCmd_ParsedLine.stream().map(s -> (CharSequence) s)));
+                var fullInitCmd_ParsedList = TGS_ListUtils.sliceFirstToken(TGS_StreamUtils.toLst(fullInitCmd_ParsedLine.stream().map(s -> (CharSequence) s)));
                 if (runQuit.is(fullInitCmd_ParsedList.value0)) {
                     return;
                 }
@@ -55,7 +56,7 @@ public class TS_ConsoleUtils {
             TS_ConsoleUtils.clearScreen();
             d.cr("main", "givenCommand", line);
             var parsedLine = TGS_ConsoleUtils.parseLine(line);
-            var parsedList = TGS_ConsoleUtils.parseList(TGS_StreamUtils.toLst(parsedLine.stream().map(s -> (CharSequence) s)));
+            var parsedList = TGS_ListUtils.sliceFirstToken(TGS_StreamUtils.toLst(parsedLine.stream().map(s -> (CharSequence) s)));
             if (runQuit.is(parsedList.value0)) {
                 return;
             }
