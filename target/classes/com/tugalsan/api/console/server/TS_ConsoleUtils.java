@@ -19,6 +19,9 @@ public class TS_ConsoleUtils {
     }
 
     public static void mainLoop(List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
+        var runHelp = TGS_ConsoleOption.of((cmd, args) -> {
+            runOptions.forEach(ro -> d.cr("help", ro.toString()));
+        }, TGS_ListUtils.of("h", "help"));
         var runQuit = TGS_ConsoleOption.of((cmd, args) -> {
             //NOTHING
         }, quitCommands);
@@ -41,12 +44,15 @@ public class TS_ConsoleUtils {
                 if (runQuit.is(fullInitCmd_ParsedList.value0)) {
                     return;
                 }
-                var selectedRun = runOptions.stream().filter(runCustom -> runCustom.is(fullInitCmd_ParsedList.value0))
+                if (runHelp.is(fullInitCmd_ParsedList.value0)) {
+                    runHelp.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
+                }
+                var selectedCustomRun = runOptions.stream().filter(runCustom -> runCustom.is(fullInitCmd_ParsedList.value0))
                         .findFirst().orElse(null);
-                if (selectedRun == null) {
+                if (selectedCustomRun == null) {
                     runUnknown.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
                 } else {
-                    selectedRun.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
+                    selectedCustomRun.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
                 }
             }
         }
@@ -63,12 +69,15 @@ public class TS_ConsoleUtils {
             if (runCls.is(parsedList.value0)) {
                 continue;
             }
-            var selectedRun = runOptions.stream().filter(runCustom -> runCustom.is(parsedList.value0))
+            if (runHelp.is(parsedList.value0)) {
+                runHelp.run.run(parsedList.value0, parsedList.value1);
+            }
+            var selectedCustomRun = runOptions.stream().filter(runCustom -> runCustom.is(parsedList.value0))
                     .findFirst().orElse(null);
-            if (selectedRun == null) {
+            if (selectedCustomRun == null) {
                 runUnknown.run.run(parsedList.value0, parsedList.value1);
             } else {
-                selectedRun.run.run(parsedList.value0, parsedList.value1);
+                selectedCustomRun.run.run(parsedList.value0, parsedList.value1);
             }
         }
     }
