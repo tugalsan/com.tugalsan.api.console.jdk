@@ -1,12 +1,12 @@
 package com.tugalsan.api.console.server;
 
+import com.tugalsan.api.console.client.TGS_ConsoleOption;
 import com.tugalsan.api.console.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
 import com.tugalsan.api.log.server.TS_Log;
-import com.tugalsan.api.runnable.client.TGS_RunnableType2;
 import com.tugalsan.api.stream.client.TGS_StreamUtils;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class TS_ConsoleUtils {
 
@@ -17,30 +17,59 @@ public class TS_ConsoleUtils {
         System.out.flush();
     }
 
-    public static void mainLoop(List<String> quitCommands, List<String> clearScreen, TGS_RunnableType2<CharSequence, List<CharSequence>> cmd_restArguments, final CharSequence... initCmdAndArguments) {
+    public static void mainLoop(List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
+        var runQuit = TGS_ConsoleOption.of((cmd, args) -> {
+            //NOTHING
+        }, quitCommands);
+        var runCls = TGS_ConsoleOption.of((cmd, args) -> {
+            //NOTHING
+        }, quitCommands);
+        var runUnknown = TGS_ConsoleOption.of((cmd, args) -> {
+            d.ce("mainLoop", "ERROR: dont know what 2 do with args:");
+            d.ci("mainLoop", "firstArg", cmd);
+            IntStream.range(0, args.size()).forEachOrdered(i -> {
+                d.ci("mainLoop", "restArgs", i, args.get(i));
+            });
+        }, quitCommands);
         TS_ConsoleUtils.clearScreen();
         if (initCmdAndArguments != null && initCmdAndArguments.length > 0) {
             var fullInitCmd = String.join(" ", initCmdAndArguments);
             var fullInitCmd_ParsedLine = TGS_ConsoleUtils.parseLine(fullInitCmd);
             if (!fullInitCmd_ParsedLine.isEmpty()) {
                 var fullInitCmd_ParsedList = TGS_ConsoleUtils.parseList(TGS_StreamUtils.toLst(fullInitCmd_ParsedLine.stream().map(s -> (CharSequence) s)));
-                cmd_restArguments.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
+                if (runQuit.is(fullInitCmd_ParsedList.value0)) {
+                    return;
+                }
+                var selectedRun = runOptions.stream().filter(runCustom -> runCustom.is(fullInitCmd_ParsedList.value0))
+                        .findFirst().orElse(null);
+                if (selectedRun == null) {
+                    runUnknown.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
+                } else {
+                    selectedRun.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
+                }
             }
         }
         while (true) {
             d.cr("main", "newCommand:");
             var line = TS_InputKeyboardUtils.readLineFromConsole().trim();
-            if (quitCommands.stream().filter(cmd -> Objects.equals(cmd, line)).findAny().isPresent()) {
-                return;
-            }
             TS_ConsoleUtils.clearScreen();
-            if (clearScreen.stream().filter(cmd -> Objects.equals(cmd, line)).findAny().isPresent()) {
-                continue;
-            }
             d.cr("main", "givenCommand", line);
             var parsedLine = TGS_ConsoleUtils.parseLine(line);
             var parsedList = TGS_ConsoleUtils.parseList(TGS_StreamUtils.toLst(parsedLine.stream().map(s -> (CharSequence) s)));
-            cmd_restArguments.run(parsedList.value0, parsedList.value1);
+            if (runQuit.is(parsedList.value0)) {
+                return;
+            }
+            if (runCls.is(parsedList.value0)) {
+                continue;
+            }
+            var selectedRun = runOptions.stream().filter(runCustom -> runCustom.is(parsedList.value0))
+                    .findFirst().orElse(null);
+            if (selectedRun == null) {
+                runUnknown.run.run(parsedList.value0, parsedList.value1);
+            } else {
+                selectedRun.run.run(parsedList.value0, parsedList.value1);
+            }
         }
     }
+
 }
