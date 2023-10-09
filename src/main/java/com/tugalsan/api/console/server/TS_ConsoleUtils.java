@@ -6,12 +6,20 @@ import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
 import com.tugalsan.api.list.client.TGS_ListUtils;
 import com.tugalsan.api.log.server.TS_Log;
 import com.tugalsan.api.stream.client.TGS_StreamUtils;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class TS_ConsoleUtils {
 
     private final static TS_Log d = TS_Log.of(TS_ConsoleUtils.class);
+
+    public static void bindToOutputStream(OutputStream os) {
+        var con = new PrintStream(os);
+        System.setOut(con);
+        System.setErr(con);
+    }
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
