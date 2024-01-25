@@ -3,14 +3,13 @@ package com.tugalsan.api.console.server;
 import com.tugalsan.api.charset.client.TGS_CharSetUTF8;
 import com.tugalsan.api.coronator.client.TGS_Coronator;
 import com.tugalsan.api.runnable.client.TGS_RunnableType1;
-import com.tugalsan.api.log.server.TS_Log;
 import com.tugalsan.api.math.client.TGS_MathUtils;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class TS_ConsoleProgressBar {
 
-    private final static TS_Log d = TS_Log.of(true, TS_ConsoleProgressBar.class);
+//    private final static TS_Log d = TS_Log.of(true, TS_ConsoleProgressBar.class);
 
     public static enum Style {
         PERCENTAGE, STEP
