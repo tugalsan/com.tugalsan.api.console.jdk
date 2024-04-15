@@ -74,7 +74,7 @@ public class TS_ConsoleUtils {
             if (runQuit.is(parsedList.first())) {
                 return;
             }
-            if (runCls.is(parsedList.first() instanceof)) {
+            if (runCls.is(parsedList.first() )) {
                 continue;
             }
             if (runHelp.is(parsedList.first())) {
