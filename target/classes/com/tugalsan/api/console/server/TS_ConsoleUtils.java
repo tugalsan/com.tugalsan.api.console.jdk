@@ -49,18 +49,18 @@ public class TS_ConsoleUtils {
             var fullInitCmd_ParsedLine = TGS_ConsoleUtils.parseLine(fullInitCmd);
             if (!fullInitCmd_ParsedLine.isEmpty()) {
                 var fullInitCmd_ParsedList = TGS_ListUtils.sliceFirstToken(TGS_StreamUtils.toLst(fullInitCmd_ParsedLine.stream().map(s -> (CharSequence) s)));
-                if (runQuit.is(fullInitCmd_ParsedList.value0)) {
+                if (runQuit.is(fullInitCmd_ParsedList.first())) {
                     return;
                 }
-                if (runHelp.is(fullInitCmd_ParsedList.value0)) {
-                    runHelp.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
+                if (runHelp.is(fullInitCmd_ParsedList.first())) {
+                    runHelp.run.run(fullInitCmd_ParsedList.first(), fullInitCmd_ParsedList.rest());
                 }
-                var selectedCustomRun = runOptions.stream().filter(runCustom -> runCustom.is(fullInitCmd_ParsedList.value0))
+                var selectedCustomRun = runOptions.stream().filter(runCustom -> runCustom.is(fullInitCmd_ParsedList.first()))
                         .findFirst().orElse(null);
                 if (selectedCustomRun == null) {
-                    runUnknown.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
+                    runUnknown.run.run(fullInitCmd_ParsedList.first(), fullInitCmd_ParsedList.rest());
                 } else {
-                    selectedCustomRun.run.run(fullInitCmd_ParsedList.value0, fullInitCmd_ParsedList.value1);
+                    selectedCustomRun.run.run(fullInitCmd_ParsedList.first(), fullInitCmd_ParsedList.rest());
                 }
             }
         }
@@ -71,21 +71,21 @@ public class TS_ConsoleUtils {
             d.cr("main", "givenCommand", line);
             var parsedLine = TGS_ConsoleUtils.parseLine(line);
             var parsedList = TGS_ListUtils.sliceFirstToken(TGS_StreamUtils.toLst(parsedLine.stream().map(s -> (CharSequence) s)));
-            if (runQuit.is(parsedList.value0)) {
+            if (runQuit.is(parsedList.first())) {
                 return;
             }
-            if (runCls.is(parsedList.value0)) {
+            if (runCls.is(parsedList.first() instanceof)) {
                 continue;
             }
-            if (runHelp.is(parsedList.value0)) {
-                runHelp.run.run(parsedList.value0, parsedList.value1);
+            if (runHelp.is(parsedList.first())) {
+                runHelp.run.run(parsedList.first(), parsedList.rest());
             }
-            var selectedCustomRun = runOptions.stream().filter(runCustom -> runCustom.is(parsedList.value0))
+            var selectedCustomRun = runOptions.stream().filter(runCustom -> runCustom.is(parsedList.first()))
                     .findFirst().orElse(null);
             if (selectedCustomRun == null) {
-                runUnknown.run.run(parsedList.value0, parsedList.value1);
+                runUnknown.run.run(parsedList.first(), parsedList.rest());
             } else {
-                selectedCustomRun.run.run(parsedList.value0, parsedList.value1);
+                selectedCustomRun.run.run(parsedList.first(), parsedList.rest());
             }
         }
     }

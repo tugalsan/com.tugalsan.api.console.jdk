@@ -6,7 +6,6 @@ module com.tugalsan.api.console {
     requires com.tugalsan.api.validator;
     requires com.tugalsan.api.string;
     requires com.tugalsan.api.coronator;
-    requires com.tugalsan.api.tuple;
     requires com.tugalsan.api.callable;
     requires com.tugalsan.api.log;
     requires com.tugalsan.api.list;
