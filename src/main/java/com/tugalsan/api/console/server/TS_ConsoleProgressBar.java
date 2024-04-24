@@ -1,7 +1,6 @@
 package com.tugalsan.api.console.server;
 
 import com.tugalsan.api.charset.client.TGS_CharSet;
-import com.tugalsan.api.charset.client.Utf8;
 import com.tugalsan.api.coronator.client.TGS_Coronator;
 import com.tugalsan.api.runnable.client.TGS_RunnableType1;
 import com.tugalsan.api.math.client.TGS_MathUtils;
