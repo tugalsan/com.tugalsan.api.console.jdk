@@ -102,7 +102,7 @@ public class TS_ConsoleProgressBar {
         }
         IntStream.rangeClosed(1, stepSize).forEach(stepIndex -> {
 //            d.ci("setCurrent", stepIndex, stepCurrent, stepIndex > stepCurrent ? TGS_CharSetUTF8.UTF8_INCOMPLETE() : TGS_CharSetUTF8.UTF8_COMPLETE());
-            lineBuffer.replace(stepIndex, stepIndex + 1, stepIndex > stepCurrent ? Utf8.UTF8_INCOMPLETE() : Utf8.UTF8_COMPLETE());
+            lineBuffer.replace(stepIndex, stepIndex + 1, stepIndex > stepCurrent ? TGS_CharSet.cmn().UTF8_INCOMPLETE() : TGS_CharSet.cmn().UTF8_COMPLETE());
         });
         lineBuffer.replace(1 + stepSize, 1 + stepSize + styleSize, formatStyle());
         lineBuffer.setLength(1 + stepSize + styleSize);
