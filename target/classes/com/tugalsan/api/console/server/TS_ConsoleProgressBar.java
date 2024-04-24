@@ -1,6 +1,6 @@
 package com.tugalsan.api.console.server;
 
-import com.tugalsan.api.charset.client.TGS_CharSetUTF8;
+import com.tugalsan.api.charset.client.TGS_CharSet;
 import com.tugalsan.api.coronator.client.TGS_Coronator;
 import com.tugalsan.api.runnable.client.TGS_RunnableType1;
 import com.tugalsan.api.math.client.TGS_MathUtils;
@@ -48,7 +48,7 @@ public class TS_ConsoleProgressBar {
                 .limit(labelSize)
                 .forEach(labelBuffer::append);
         this.lineBuffer = new StringBuilder();
-        Stream.generate(() -> TGS_CharSetUTF8.UTF8_INCOMPLETE())
+        Stream.generate(() -> TGS_CharSet.cmn().UTF8_INCOMPLETE())
                 .limit(stepSize)
                 .forEach(lineBuffer::append);
         Stream.generate(() -> " ")
@@ -102,7 +102,7 @@ public class TS_ConsoleProgressBar {
         }
         IntStream.rangeClosed(1, stepSize).forEach(stepIndex -> {
 //            d.ci("setCurrent", stepIndex, stepCurrent, stepIndex > stepCurrent ? TGS_CharSetUTF8.UTF8_INCOMPLETE() : TGS_CharSetUTF8.UTF8_COMPLETE());
-            lineBuffer.replace(stepIndex, stepIndex + 1, stepIndex > stepCurrent ? TGS_CharSetUTF8.UTF8_INCOMPLETE() : TGS_CharSetUTF8.UTF8_COMPLETE());
+            lineBuffer.replace(stepIndex, stepIndex + 1, stepIndex > stepCurrent ? Utf8.UTF8_INCOMPLETE() : Utf8.UTF8_COMPLETE());
         });
         lineBuffer.replace(1 + stepSize, 1 + stepSize + styleSize, formatStyle());
         lineBuffer.setLength(1 + stepSize + styleSize);
