@@ -1,5 +1,6 @@
 package com.tugalsan.api.console.server;
 
+import com.tugalsan.api.charset.client.TGS_CharSet;
 import com.tugalsan.api.console.client.TGS_ConsoleOption;
 import com.tugalsan.api.console.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
@@ -26,17 +27,17 @@ public class TS_ConsoleUtils {
         System.out.flush();
     }
 
-    public static void mainLoop(List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
-        var runHelp = TGS_ConsoleOption.of((cmd, args) -> {
+    public static void mainLoop(TGS_CharSet.CommonGwt.Language language, List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
+        var runHelp = TGS_ConsoleOption.of(language, (cmd, args) -> {
             runOptions.forEach(ro -> d.cr("help", ro.toString()));
         }, TGS_ListUtils.of("h", "help"));
-        var runQuit = TGS_ConsoleOption.of((cmd, args) -> {
+        var runQuit = TGS_ConsoleOption.of(language, (cmd, args) -> {
             //NOTHING
         }, quitCommands);
-        var runCls = TGS_ConsoleOption.of((cmd, args) -> {
+        var runCls = TGS_ConsoleOption.of(language, (cmd, args) -> {
             //NOTHING
         }, quitCommands);
-        var runUnknown = TGS_ConsoleOption.of((cmd, args) -> {
+        var runUnknown = TGS_ConsoleOption.of(language, (cmd, args) -> {
             d.ce("mainLoop", "ERROR: dont know what 2 do with args:");
             d.ci("mainLoop", "firstArg", cmd);
             IntStream.range(0, args.size()).forEachOrdered(i -> {
