@@ -1,6 +1,7 @@
 package com.tugalsan.api.console.server;
 
 import com.tugalsan.api.charset.client.TGS_CharSet;
+import com.tugalsan.api.charset.client.TGS_CharSetLocaleTypes;
 import com.tugalsan.api.console.client.TGS_ConsoleOption;
 import com.tugalsan.api.console.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;

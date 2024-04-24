@@ -1,6 +1,7 @@
 package com.tugalsan.api.console.client;
 
-import com.tugalsan.api.charset.client.TGS_CharSet;
+import com.tugalsan.api.charset.client.TGS_CharSetCast;
+import com.tugalsan.api.charset.client.TGS_CharSetLocaleTypes;
 import com.tugalsan.api.list.client.TGS_ListUtils;
 import com.tugalsan.api.runnable.client.TGS_RunnableType2;
 import java.util.List;
@@ -26,7 +27,7 @@ public class TGS_ConsoleOption {
 
     public boolean is(CharSequence cmdName) {
         return alias.stream()
-                .filter(a -> language.equalsIgnoreCase(a, cmdName))
+                .filter(a -> TGS_CharSetCast.typed(language).equalsIgnoreCase(a, cmdName))
                 .findAny().isPresent();
     }
 
