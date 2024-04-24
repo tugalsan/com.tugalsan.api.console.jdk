@@ -7,20 +7,20 @@ import java.util.List;
 
 public class TGS_ConsoleOption {
 
-    private TGS_ConsoleOption(TGS_CharSet.CommonGwt.Language language, TGS_RunnableType2<CharSequence, List<CharSequence>> run, List<String> alias) {
+    private TGS_ConsoleOption(TGS_CharSetLocaleTypes language, TGS_RunnableType2<CharSequence, List<CharSequence>> run, List<String> alias) {
         this.language = language;
         this.run = run;
         this.alias = alias;
     }
-    final public TGS_CharSet.CommonGwt.Language language;
+    final public TGS_CharSetLocaleTypes language;
     final public TGS_RunnableType2<CharSequence, List<CharSequence>> run;
     final public List<String> alias;
 
-    public static TGS_ConsoleOption of(TGS_CharSet.CommonGwt.Language language, TGS_RunnableType2<CharSequence, List<CharSequence>> run, List<String> alias) {
+    public static TGS_ConsoleOption of(TGS_CharSetLocaleTypes language, TGS_RunnableType2<CharSequence, List<CharSequence>> run, List<String> alias) {
         return new TGS_ConsoleOption(language, run, alias);
     }
 
-    public static TGS_ConsoleOption of(TGS_CharSet.CommonGwt.Language language, TGS_RunnableType2<CharSequence, List<CharSequence>> run, String... alias) {
+    public static TGS_ConsoleOption of(TGS_CharSetLocaleTypes language, TGS_RunnableType2<CharSequence, List<CharSequence>> run, String... alias) {
         return of(language, run, TGS_ListUtils.of(alias));
     }
 

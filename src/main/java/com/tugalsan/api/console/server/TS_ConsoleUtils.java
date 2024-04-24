@@ -1,6 +1,7 @@
 package com.tugalsan.api.console.server;
 
 import com.tugalsan.api.charset.client.TGS_CharSet;
+import com.tugalsan.api.charset.client.TGS_CharSetLocaleTypes;
 import com.tugalsan.api.console.client.TGS_ConsoleOption;
 import com.tugalsan.api.console.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
@@ -27,7 +28,7 @@ public class TS_ConsoleUtils {
         System.out.flush();
     }
 
-    public static void mainLoop(TGS_CharSet.CommonGwt.Language language, List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
+    public static void mainLoop(TGS_CharSetLocaleTypes language, List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
         var runHelp = TGS_ConsoleOption.of(language, (cmd, args) -> {
             runOptions.forEach(ro -> d.cr("help", ro.toString()));
         }, TGS_ListUtils.of("h", "help"));

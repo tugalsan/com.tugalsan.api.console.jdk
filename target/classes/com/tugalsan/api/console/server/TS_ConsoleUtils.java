@@ -27,7 +27,7 @@ public class TS_ConsoleUtils {
         System.out.flush();
     }
 
-    public static void mainLoop(TGS_CharSet.CommonGwt.Language language, List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
+    public static void mainLoop(TGS_CharSetLocaleTypes language, List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
         var runHelp = TGS_ConsoleOption.of(language, (cmd, args) -> {
             runOptions.forEach(ro -> d.cr("help", ro.toString()));
         }, TGS_ListUtils.of("h", "help"));
