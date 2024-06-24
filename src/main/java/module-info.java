@@ -1,7 +1,6 @@
 module com.tugalsan.api.console {
     //requires commons.cli;
     requires com.tugalsan.api.charset;
-    requires com.tugalsan.api.runnable;
     requires com.tugalsan.api.input;
     requires com.tugalsan.api.validator;
     requires com.tugalsan.api.string;
