@@ -1,8 +1,8 @@
 package com.tugalsan.api.console.server;
 
-import com.tugalsan.api.callable.client.TGS_CallableType1Void;
+import com.tugalsan.api.callable.client.TGS_CallableType1_Coronator;
 import com.tugalsan.api.charset.client.TGS_CharSet;
-import com.tugalsan.api.coronator.client.TGS_Coronator;
+import com.tugalsan.api.callable.client.TGS_CallableType1_Run;
 import com.tugalsan.api.math.client.TGS_MathUtils;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -85,7 +85,7 @@ public class TS_ConsoleProgressBar {
     }
 
     public TS_ConsoleProgressBar setCurrent(int stepNew, String labelNew) {
-        stepCurrent = TGS_Coronator.ofInt()
+        stepCurrent = TGS_CallableType1_Coronator.ofInt()
                 .anoint(val -> stepNew)
                 .anointIf(val -> stepNew < 0, val -> 0)
                 .anointIf(val -> stepNew > stepSize, val -> stepSize)
@@ -115,7 +115,7 @@ public class TS_ConsoleProgressBar {
         return this;
     }
 
-    public void forEach(TGS_CallableType1Void<TS_ConsoleProgressBar> progress) {
+    public void forEach(TGS_CallableType1_Run<TS_ConsoleProgressBar> progress) {
         IntStream.rangeClosed(0, stepSize).forEach(stepNumber -> {
             progress.run(setCurrent(stepNumber, null));
         });

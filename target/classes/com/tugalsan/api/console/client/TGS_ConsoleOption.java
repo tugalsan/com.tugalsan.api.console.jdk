@@ -1,6 +1,6 @@
 package com.tugalsan.api.console.client;
 
-import com.tugalsan.api.callable.client.TGS_CallableType2Void;
+import com.tugalsan.api.callable.client.TGS_CallableType2_Run;
 import com.tugalsan.api.charset.client.TGS_CharSetCast;
 import com.tugalsan.api.charset.client.TGS_CharSetLocaleTypes;
 import com.tugalsan.api.list.client.TGS_ListUtils;
@@ -8,20 +8,20 @@ import java.util.List;
 
 public class TGS_ConsoleOption {
 
-    private TGS_ConsoleOption(TGS_CharSetLocaleTypes language, TGS_CallableType2Void<CharSequence, List<CharSequence>> run, List<String> alias) {
+    private TGS_ConsoleOption(TGS_CharSetLocaleTypes language, TGS_CallableType2_Run<CharSequence, List<CharSequence>> run, List<String> alias) {
         this.language = language;
         this.run = run;
         this.alias = alias;
     }
     final public TGS_CharSetLocaleTypes language;
-    final public TGS_CallableType2Void<CharSequence, List<CharSequence>> run;
+    final public TGS_CallableType2_Run<CharSequence, List<CharSequence>> run;
     final public List<String> alias;
 
-    public static TGS_ConsoleOption of(TGS_CharSetLocaleTypes language, TGS_CallableType2Void<CharSequence, List<CharSequence>> run, List<String> alias) {
+    public static TGS_ConsoleOption of(TGS_CharSetLocaleTypes language, TGS_CallableType2_Run<CharSequence, List<CharSequence>> run, List<String> alias) {
         return new TGS_ConsoleOption(language, run, alias);
     }
 
-    public static TGS_ConsoleOption of(TGS_CharSetLocaleTypes language, TGS_CallableType2Void<CharSequence, List<CharSequence>> run, String... alias) {
+    public static TGS_ConsoleOption of(TGS_CharSetLocaleTypes language, TGS_CallableType2_Run<CharSequence, List<CharSequence>> run, String... alias) {
         return of(language, run, TGS_ListUtils.of(alias));
     }
 
