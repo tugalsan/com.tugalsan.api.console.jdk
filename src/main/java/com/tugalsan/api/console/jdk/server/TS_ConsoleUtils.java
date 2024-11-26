@@ -1,9 +1,8 @@
-package com.tugalsan.api.console.server;
+package com.tugalsan.api.console.jdk.server;
 
-import com.tugalsan.api.charset.client.TGS_CharSet;
 import com.tugalsan.api.charset.client.TGS_CharSetLocaleTypes;
-import com.tugalsan.api.console.client.TGS_ConsoleOption;
-import com.tugalsan.api.console.client.TGS_ConsoleUtils;
+import com.tugalsan.api.console.jdk.client.TGS_ConsoleOption;
+import com.tugalsan.api.console.jdk.client.TGS_ConsoleUtils;
 import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
 import com.tugalsan.api.list.client.TGS_ListUtils;
 import com.tugalsan.api.log.server.TS_Log;

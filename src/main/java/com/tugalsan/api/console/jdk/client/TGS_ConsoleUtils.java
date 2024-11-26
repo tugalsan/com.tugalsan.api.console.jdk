@@ -1,4 +1,4 @@
-package com.tugalsan.api.console.client;
+package com.tugalsan.api.console.jdk.client;
 
 import java.util.ArrayList;
 import java.util.List;

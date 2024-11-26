@@ -1,4 +1,4 @@
-package com.tugalsan.api.console.server;
+package com.tugalsan.api.console.jdk.server;
 
 import com.tugalsan.api.function.client.TGS_FuncEffectivelyFinal;
 import com.tugalsan.api.charset.client.TGS_CharSet;

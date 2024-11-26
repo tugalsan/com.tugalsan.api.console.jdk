@@ -1,4 +1,4 @@
-package com.tugalsan.api.console.server;
+package com.tugalsan.api.console.jdk.server;
 
 import com.tugalsan.api.list.client.TGS_ListCastUtils;
 import com.tugalsan.api.stream.client.TGS_StreamUtils;

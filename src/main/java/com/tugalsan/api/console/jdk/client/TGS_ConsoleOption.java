@@ -1,4 +1,4 @@
-package com.tugalsan.api.console.client;
+package com.tugalsan.api.console.jdk.client;
 
 import com.tugalsan.api.function.client.TGS_Func_In2;
 import com.tugalsan.api.charset.client.TGS_CharSetCast;
