@@ -10,4 +10,5 @@ module com.tugalsan.api.console {
     requires com.tugalsan.api.math;
     requires com.tugalsan.api.stream;
     exports com.tugalsan.api.console.jdk.client;
+    exports com.tugalsan.api.console.jdk.server;
 }
