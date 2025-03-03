@@ -14,6 +14,10 @@ import java.util.stream.IntStream;
 
 public class TS_ConsoleUtils {
 
+    private TS_ConsoleUtils() {
+
+    }
+
     private final static TS_Log d = TS_Log.of(TS_ConsoleUtils.class);
 
     public static void bindToOutputStream(OutputStream os) {
@@ -36,14 +40,14 @@ public class TS_ConsoleUtils {
         }, quitCommands);
         var runCls = TGS_ConsoleOption.of(language, (cmd, args) -> {
             //NOTHING
-        }, quitCommands);
+        }, clearScreen);
         var runUnknown = TGS_ConsoleOption.of(language, (cmd, args) -> {
             d.ce("mainLoop", "ERROR: dont know what 2 do with args:");
             d.ci("mainLoop", "firstArg", cmd);
             IntStream.range(0, args.size()).forEachOrdered(i -> {
                 d.ci("mainLoop", "restArgs", i, args.get(i));
             });
-        }, quitCommands);
+        });
         TS_ConsoleUtils.clearScreen();
         if (initCmdAndArguments != null && initCmdAndArguments.length > 0) {
             var fullInitCmd = String.join(" ", initCmdAndArguments);

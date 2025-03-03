@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TGS_ConsoleUtils {
+    
+    private TGS_ConsoleUtils(){
+        
+    }
 
     public static List<String> parseLine(String line) {
         List<String> tokens = new ArrayList();

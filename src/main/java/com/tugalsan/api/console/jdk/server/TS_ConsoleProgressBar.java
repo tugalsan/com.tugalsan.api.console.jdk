@@ -28,11 +28,11 @@ public class TS_ConsoleProgressBar {
     private String formatStyle() {
         formmattedStyleLabel.setLength(0);
         formmattedStyleLabel.append(calculateStyleFor(stepCurrent));
-        while (styleLabelPrefix.length() + styleLabelSuffix.length() + formmattedStyleLabel.length() < styleSize) {
+        while (STYLE_LABEL_PREFIX.length() + STYLE_LABEL_SUFFIX.length() + formmattedStyleLabel.length() < styleSize) {
             formmattedStyleLabel.insert(0, ' ');
         }
-        formmattedStyleLabel.insert(0, styleLabelPrefix);
-        formmattedStyleLabel.append(styleLabelSuffix);
+        formmattedStyleLabel.insert(0, STYLE_LABEL_PREFIX);
+        formmattedStyleLabel.append(STYLE_LABEL_SUFFIX);
         return formmattedStyleLabel.toString();
     }
     final StringBuilder formmattedStyleLabel = new StringBuilder();
@@ -42,7 +42,7 @@ public class TS_ConsoleProgressBar {
         this.stepSize = stepSize;
         this.labelSize = labelSize;
         this.style = style;
-        this.styleSize = styleLabelPrefix.length() + calculateStyleFor(stepSize).length() + styleLabelSuffix.length();
+        this.styleSize = STYLE_LABEL_PREFIX.length() + calculateStyleFor(stepSize).length() + STYLE_LABEL_SUFFIX.length();
         this.labelBuffer = new StringBuilder();
         Stream.generate(() -> " ")
                 .limit(labelSize)
@@ -61,8 +61,8 @@ public class TS_ConsoleProgressBar {
     private int stepCurrent;
     final private StringBuilder labelBuffer;
     final private StringBuilder lineBuffer;
-    final private String styleLabelPrefix = " [";
-    final private String styleLabelSuffix = "] ";
+    final static private String STYLE_LABEL_PREFIX = " [";
+    final static private String STYLE_LABEL_SUFFIX = "] ";
 
     public int size() {
         return stepSize;
@@ -80,6 +80,7 @@ public class TS_ConsoleProgressBar {
         return calculatePercentageFor(stepCurrent);
     }
 
+    @Deprecated //USE getCurrent
     public int getLabel() {
         return stepCurrent;
     }
