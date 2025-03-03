@@ -26,9 +26,7 @@ public class TGS_ConsoleOption {
     }
 
     public boolean is(CharSequence cmdName) {
-        return alias.stream()
-                .filter(a -> TGS_CharSetCast.typed(language).equalsIgnoreCase(a, cmdName))
-                .findAny().isPresent();
+        return alias.stream().anyMatch(a -> TGS_CharSetCast.typed(language).equalsIgnoreCase(a, cmdName));
     }
 
     @Override
