@@ -1,8 +1,8 @@
 package com.tugalsan.api.console.jdk.server;
 
-import com.tugalsan.api.function.client.maythrow.uncheckedexceptions.TGS_FuncMTUCEEffectivelyFinal;
+import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTUEffectivelyFinal;
 import com.tugalsan.api.charset.client.TGS_CharSet;
-import com.tugalsan.api.function.client.maythrow.uncheckedexceptions.TGS_FuncMTUCE_In1;
+import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU_In1;
 import com.tugalsan.api.math.client.TGS_MathUtils;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -86,7 +86,7 @@ public class TS_ConsoleProgressBar {
     }
 
     public TS_ConsoleProgressBar setCurrent(int stepNew, String labelNew) {
-        stepCurrent = TGS_FuncMTUCEEffectivelyFinal.ofInt()
+        stepCurrent = TGS_FuncMTUEffectivelyFinal.ofInt()
                 .anoint(val -> stepNew)
                 .anointIf(val -> stepNew < 0, val -> 0)
                 .anointIf(val -> stepNew > stepSize, val -> stepSize)
@@ -116,7 +116,7 @@ public class TS_ConsoleProgressBar {
         return this;
     }
 
-    public void forEach(TGS_FuncMTUCE_In1<TS_ConsoleProgressBar> progress) {
+    public void forEach(TGS_FuncMTU_In1<TS_ConsoleProgressBar> progress) {
         IntStream.rangeClosed(0, stepSize).forEach(stepNumber -> {
             progress.run(setCurrent(stepNumber, null));
         });
