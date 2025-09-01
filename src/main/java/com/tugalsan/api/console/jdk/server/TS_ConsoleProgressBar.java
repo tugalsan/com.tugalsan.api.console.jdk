@@ -9,8 +9,6 @@ import java.util.stream.Stream;
 
 public class TS_ConsoleProgressBar {
 
-//    private final static TS_Log d = TS_Log.of(true, TS_ConsoleProgressBar.class);
-
     public static enum Style {
         PERCENTAGE, STEP
     }

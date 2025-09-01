@@ -18,7 +18,10 @@ public class TS_ConsoleUtils {
 
     }
 
-    private final static TS_Log d = TS_Log.of(TS_ConsoleUtils.class);
+     private static TS_Log d() {
+        return d.orElse(TS_Log.of(true, TS_ConsoleUtils.class));
+    }
+    final private static StableValue<TS_Log> d = StableValue.of();
 
     public static void bindToOutputStream(OutputStream os) {
         var con = new PrintStream(os);
@@ -27,13 +30,13 @@ public class TS_ConsoleUtils {
     }
 
     public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
+        IO.print("\033[H\033[2J");
         System.out.flush();
     }
 
     public static void mainLoop(TGS_CharSetLocaleTypes language, List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
         var runHelp = TGS_ConsoleOption.of(language, (cmd, args) -> {
-            runOptions.forEach(ro -> d.cr("help", ro.toString()));
+            runOptions.forEach(ro -> d().cr("help", ro.toString()));
         }, TGS_ListUtils.of("h", "help"));
         var runQuit = TGS_ConsoleOption.of(language, (cmd, args) -> {
             //NOTHING
@@ -42,10 +45,10 @@ public class TS_ConsoleUtils {
             //NOTHING
         }, clearScreen);
         var runUnknown = TGS_ConsoleOption.of(language, (cmd, args) -> {
-            d.ce("mainLoop", "ERROR: dont know what 2 do with args:");
-            d.ci("mainLoop", "firstArg", cmd);
+            d().ce("mainLoop", "ERROR: dont know what 2 do with args:");
+            d().ci("mainLoop", "firstArg", cmd);
             IntStream.range(0, args.size()).forEachOrdered(i -> {
-                d.ci("mainLoop", "restArgs", i, args.get(i));
+                d().ci("mainLoop", "restArgs", i, args.get(i));
             });
         });
         TS_ConsoleUtils.clearScreen();
@@ -70,10 +73,10 @@ public class TS_ConsoleUtils {
             }
         }
         while (true) {
-            d.cr("main", "newCommand:");
+            d().cr("main", "newCommand:");
             var line = TS_InputKeyboardUtils.readLineFromConsole().trim();
             TS_ConsoleUtils.clearScreen();
-            d.cr("main", "givenCommand", line);
+            d().cr("main", "givenCommand", line);
             var parsedLine = TGS_ConsoleUtils.parseLine(line);
             var parsedList = TGS_ListUtils.sliceFirstToken(TGS_StreamUtils.toLst(parsedLine.stream().map(s -> (CharSequence) s)));
             if (runQuit.is(parsedList.value0)) {
