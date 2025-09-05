@@ -19,7 +19,7 @@ public class TS_ConsoleUtils {
     }
 
      private static TS_Log d() {
-        return d.orElse(TS_Log.of(true, TS_ConsoleUtils.class));
+        return d.orElse(TS_Log.of( TS_ConsoleUtils.class));
     }
     final private static StableValue<TS_Log> d = StableValue.of();
 
@@ -31,7 +31,7 @@ public class TS_ConsoleUtils {
 
     public static void clearScreen() {
         IO.print("\033[H\033[2J");
-        System.out.flush();
+        System.out.flush();// I need it, as I did not use println above.
     }
 
     public static void mainLoop(TGS_CharSetLocaleTypes language, List<String> quitCommands, List<String> clearScreen, List<TGS_ConsoleOption> runOptions, final CharSequence... initCmdAndArguments) {
