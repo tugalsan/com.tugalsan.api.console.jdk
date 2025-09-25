@@ -1,4 +1,4 @@
-module com.tugalsan.api.console {
+module com.tugalsan.api.console.jdk {
     //requires commons.cli;
     requires com.tugalsan.api.charset;
     requires com.tugalsan.api.input;

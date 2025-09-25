@@ -1,16 +1,15 @@
 package com.tugalsan.api.console.jdk.server;
 
-import com.tugalsan.api.charset.client.TGS_CharSetLocaleTypes;
+import module com.tugalsan.api.charset;
+import module com.tugalsan.api.list;
+import module com.tugalsan.api.log;
+import module com.tugalsan.api.stream;
+import module com.tugalsan.api.input;
 import com.tugalsan.api.console.jdk.client.TGS_ConsoleOption;
 import com.tugalsan.api.console.jdk.client.TGS_ConsoleUtils;
-import com.tugalsan.api.input.server.TS_InputKeyboardUtils;
-import com.tugalsan.api.list.client.TGS_ListUtils;
-import com.tugalsan.api.log.server.TS_Log;
-import com.tugalsan.api.stream.client.TGS_StreamUtils;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.List;
-import java.util.stream.IntStream;
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
 
 public class TS_ConsoleUtils {
 

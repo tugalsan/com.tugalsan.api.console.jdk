@@ -1,11 +1,9 @@
 package com.tugalsan.api.console.jdk.server;
 
-import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTUEffectivelyFinal;
-import com.tugalsan.api.charset.client.TGS_CharSet;
-import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU_In1;
-import com.tugalsan.api.math.client.TGS_MathUtils;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import module com.tugalsan.api.charset;
+import module com.tugalsan.api.function;
+import module com.tugalsan.api.math;
+import java.util.stream.*;
 
 public class TS_ConsoleProgressBar {
 
